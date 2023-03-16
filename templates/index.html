@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">-->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>AD Selfservice User Telephone Update</title>
+    <script src="../static/css/jquery-3.6.3.min.js"></script>
+    <script src="../static/css/jquery.validate.js"></script>
+    <script src="../static/css/additional-methods.js"></script>
+    <script src="../static/css/form-validation.js"></script>
+    <script>
+        const handlePhone = (event) => {
+            let input = event.target
+            input.value = phoneMask(input.value)
+        }
+       
+        const phoneMask = (value) => {
+            if (!value) return ""
+            value = value.replace(/\D/g,'')
+            value = value.replace(/(\d{2})(\d)/,"($1) $2")
+            value = value.replace(/(\d)(\d{4})$/,"$1-$2")
+            return value
+        }
+    </script>
+</head>
+<body>
+  <div class="container">
+      <div class="wrapper">
+        <form class="form-wrapper" name="registration" method="post">
+          <fieldset class="section is-active">
+            <h1>Telephone Update</h1> 
+            <label for="telefone1">Telephone for user: {{ user }}</label>
+            <input type="text" name="telefone1" id="telefone1" maxlength="14" onkeyup="handlePhone(event)" class="telefone phone-group">
+            <br>
+            <input class="submit button" id="content" type="submit" value="Submit">
+            <br><br><br>
+            <div id="errorbox"></div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+</body>
+</html>
